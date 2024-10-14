@@ -9,6 +9,7 @@ Publish
 *.suo
 *.cscfg
 *.Cache
+*.zip
 project.lock.json
 
 /packages
@@ -46,3 +47,5 @@ __pycache__/
 __blobstorage__
 __queuestorage__
 __azurite_db*__.json
+
+/.vscode
