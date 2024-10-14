@@ -10,6 +10,7 @@ env:
   AZURE_FUNCTIONAPP_PACKAGE_PATH: './cron-worker'  # Path to the function app
   NODE_VERSION: '20.x'  # Node.js version
   APP_URL: 'https://vesta-functionapp-dev.azurewebsites.net'
+  APP_NAME: 'vesta-functionapp-dev'
 
 jobs:
   build:
@@ -66,15 +67,12 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
         id: fa
         with:
-          app-name: 'vesta-functionapp-dev'
+          app-name: '${{ env.APP_NAME }}'
           slot-name: 'production'
           package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'  # Keep the path consistent
